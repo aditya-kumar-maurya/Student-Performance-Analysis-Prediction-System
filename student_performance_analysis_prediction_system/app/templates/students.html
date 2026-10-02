@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Student Management - SQLite{% endblock %}
+{% block content %}
+<section class="page-wrap">
+  <div class="page-title"><span class="section-number">7</span><div><h1>Student Management (SQLite)</h1><p>Add, view, edit, delete and import student records. All operations use the SQLite database.</p></div></div>
+  <div class="management-actions">
+    <a class="btn primary" href="{{ url_for('add_student') }}">＋ Add Student</a>
+    <a class="btn secondary" href="{{ url_for('import_csv') }}">⇧ Import CSV</a>
+    <form class="searchbar inline-form" method="GET" action="{{ url_for('students') }}">
+      <input name="q" value="{{ q }}" placeholder="Search by ID, name or department">
+      <button class="btn primary" type="submit">Search</button>
+      {% if q %}<a class="btn secondary" href="{{ url_for('students') }}">Clear</a>{% endif %}
+    </form>
+  </div>
+  <div class="sqlite-note">Database: <strong>data/student_performance.db</strong> · SQL operations: <strong>INSERT, SELECT, UPDATE, DELETE</strong></div>
+  <div class="table-card">
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Department</th><th>Semester</th><th>Attendance</th><th>Previous Score</th><th>Final Score</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for s in students %}
+        <tr>
+          <td>{{ s.student_id }}</td><td>{{ s.student_name }}</td><td>{{ s.department }}</td><td>{{ s.semester }}</td><td>{{ s.attendance_percentage }}%</td><td>{{ s.previous_exam_score }}</td><td><b>{{ s.final_score }}</b></td>
+          <td class="actions"><a class="link-btn" href="{{ url_for('student', student_id=s.student_id) }}">View</a><a class="link-btn edit" href="{{ url_for('edit_student', student_id=s.student_id) }}">Edit</a><form method="POST" action="{{ url_for('delete_student', student_id=s.student_id) }}" onsubmit="return confirm('Delete this student from SQLite?');"><button class="danger-link" type="submit">Delete</button></form></td>
+        </tr>
+      {% else %}<tr><td colspan="8">No student records found.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

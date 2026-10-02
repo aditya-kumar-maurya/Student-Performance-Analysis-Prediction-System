@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+{% block title %}{{ 'Add Student' if mode == 'add' else 'Edit Student' }} - SQLite{% endblock %}
+{% block content %}
+<section class="page-wrap">
+  <div class="page-title"><span class="section-number">7</span><div><h1>{{ 'Add Student' if mode == 'add' else 'Edit Student' }}</h1><p>{{ 'Create a new student record in SQLite using SQL INSERT.' if mode == 'add' else 'Update this student record in SQLite using SQL UPDATE.' }}</p></div></div>
+  <form class="prediction-form" method="POST">
+    <div class="form-grid">
+      <label>Student ID<input name="student_id" value="{{ student.student_id if student else '' }}" {% if mode == 'edit' %}readonly{% endif %} required></label>
+      <label>Student Name<input name="student_name" value="{{ student.student_name if student else '' }}" required></label>
+      <label>Age<input name="age" type="number" min="16" max="60" value="{{ student.age if student else 21 }}" required></label>
+      <label>Gender<select name="gender"><option {% if student and student.gender == 'Male' %}selected{% endif %}>Male</option><option {% if student and student.gender == 'Female' %}selected{% endif %}>Female</option></select></label>
+      <label>Department<select name="department">{% for d in ['CSE','IT','ECE','ME','CE'] %}<option {% if student and student.department == d %}selected{% endif %}>{{ d }}</option>{% endfor %}</select></label>
+      <label>Semester<input name="semester" type="number" min="1" max="8" value="{{ student.semester if student else 6 }}" required></label>
+      <label>Attendance (%)<input name="attendance_percentage" type="number" step="0.1" min="0" max="100" value="{{ student.attendance_percentage if student else 80 }}" required></label>
+      <label>Study Hours / Day<input name="study_hours_per_day" type="number" step="0.1" min="0" max="24" value="{{ student.study_hours_per_day if student else 5 }}" required></label>
+      <label>Previous Exam Score<input name="previous_exam_score" type="number" step="0.1" min="0" max="100" value="{{ student.previous_exam_score if student else 70 }}" required></label>
+      <label>Midterm Score<input name="midterm_score" type="number" step="0.1" min="0" max="100" value="{{ student.midterm_score if student else 70 }}" required></label>
+      <label>Assignment (%)<input name="assignment_percentage" type="number" step="0.1" min="0" max="100" value="{{ student.assignment_percentage if student else 75 }}" required></label>
+      <label>Practical / Lab Score<input name="practical_lab_score" type="number" step="0.1" min="0" max="100" value="{{ student.practical_lab_score if student else 75 }}" required></label>
+      <label>Sleep Hours / Day<input name="sleep_hours_per_day" type="number" step="0.1" min="0" max="24" value="{{ student.sleep_hours_per_day if student else 7 }}" required></label>
+      <label>Online Learning Hours<input name="online_learning_hours" type="number" step="0.1" min="0" max="24" value="{{ student.online_learning_hours if student else 3 }}" required></label>
+      <label>Previous Backlogs<input name="previous_backlogs" type="number" min="0" max="20" value="{{ student.previous_backlogs if student else 0 }}" required></label>
+      <label>Internet Access<select name="internet_access"><option {% if not student or student.internet_access == 'Yes' %}selected{% endif %}>Yes</option><option {% if student and student.internet_access == 'No' %}selected{% endif %}>No</option></select></label>
+      <label>Quiz Score<input name="quiz_score" type="number" step="0.1" min="0" max="100" value="{{ student.quiz_score if student else 75 }}" required></label>
+      <label>Class Participation<input name="class_participation_score" type="number" step="0.1" min="0" max="100" value="{{ student.class_participation_score if student else 70 }}" required></label>
+      <label>Final Score<input name="final_score" type="number" step="0.1" min="0" max="100" value="{{ student.final_score if student else 0 }}" required></label>
+    </div>
+    <div class="hero-actions"><button class="btn primary large" type="submit">{{ '＋ Save Student' if mode == 'add' else '✓ Update Student' }}</button><a class="btn secondary" href="{{ url_for('students') }}">Cancel</a></div>
+  </form>
+</section>
+{% endblock %}
+
+

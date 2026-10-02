@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}{{ student.student_name }} - Student Analysis{% endblock %}
+
+{% block content %}
+
+<section class="page-wrap">
+
+  <div class="page-title">
+    <span class="section-number">5</span>
+
+    <div>
+      <h1>Student Analysis</h1>
+      <p>
+        Complete academic profile for {{ student.student_id }}.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- Student Profile -->
+  <div class="profile-card">
+
+    <div class="avatar">
+      🎓
+    </div>
+
+    <div>
+      <h2>{{ student.student_name }}</h2>
+
+      <p>
+        {{ student.student_id }}
+        · {{ student.department }}
+        · Semester {{ student.semester }}
+      </p>
+    </div>
+
+    <div class="score-box">
+      <small>Final Score</small>
+
+      <strong>
+        {{ student.final_score }}
+      </strong>
+
+      <span>
+        {{ category(student.final_score) }}
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- Academic Details -->
+  <div class="detail-grid">
+
+    {% for label,key,suffix in [
+
+      ("Age","age",""),
+      ("Gender","gender",""),
+      ("Attendance","attendance_percentage","%"),
+      ("Study Hours / Day","study_hours_per_day"," hrs"),
+      ("Previous Exam","previous_exam_score",""),
+      ("Midterm","midterm_score",""),
+      ("Assignment","assignment_percentage","%"),
+      ("Practical / Lab","practical_lab_score",""),
+      ("Sleep / Day","sleep_hours_per_day"," hrs"),
+      ("Online Learning","online_learning_hours"," hrs"),
+      ("Previous Backlogs","previous_backlogs",""),
+      ("Internet Access","internet_access",""),
+      ("Quiz Score","quiz_score",""),
+      ("Class Participation","class_participation_score","")
+
+    ] %}
+
+      <div class="detail">
+
+        <small>
+          {{ label }}
+        </small>
+
+        <strong>
+          {{ student[key] }}{{ suffix }}
+        </strong>
+
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+
+  <!-- Prediction History -->
+  <div class="section-head compact">
+
+    <h2>
+      Prediction History
+    </h2>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>ID</th>
+          <th>Predicted Score</th>
+          <th>Category</th>
+          <th>Date & Time</th>
+          <th>Action</th>
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        {% for h in history %}
+
+        <tr>
+
+          <td>
+            {{ h.id }}
+          </td>
+
+          <td>
+            <b>
+              {{ h.predicted_score }}
+            </b>
+          </td>
+
+          <td>
+            <span class="badge">
+              {{ h.performance_category }}
+            </span>
+          </td>
+
+          <td>
+            {{ h.created_at }}
+          </td>
+
+          <td class="action-buttons">
+
+            <!-- View -->
+            <a
+              href="{{ url_for('view_prediction', prediction_id=h.id) }}"
+              class="btn-view">
+              👁 View
+            </a>
+
+            <!-- Delete -->
+            <form
+              method="POST"
+              action="{{ url_for('delete_prediction', prediction_id=h.id) }}"
+              style="display:inline;"
+              onsubmit="return confirm('Are you sure you want to delete this prediction?');">
+
+              <button
+                type="submit"
+                class="btn-delete">
+                🗑 Delete
+              </button>
+
+            </form>
+
+          </td>
+
+        </tr>
+
+
+        {% else %}
+
+        <tr>
+
+          <td colspan="5">
+            No prediction history for this student.
+          </td>
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <a
+    class="btn secondary"
+    href="{{ url_for('students') }}">
+    ← Back to Student Manager
+  </a>
+
+</section>
+
+{% endblock %}

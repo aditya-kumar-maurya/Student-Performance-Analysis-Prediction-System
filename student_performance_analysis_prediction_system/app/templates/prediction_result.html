@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% block content %}
+
+<section class="result-wrap">
+
+  <div class="result-card">
+
+    <div class="result-icon">🤖</div>
+
+    <p>
+      Prediction for
+      <strong>{{ student_id }}</strong>
+    </p>
+
+    <h1>
+      {{ predicted_score }}
+      <small>/ 100</small>
+    </h1>
+
+    <div class="result-category">
+      {{ performance }}
+    </div>
+
+    <div class="hero-actions">
+
+      <a
+        class="btn primary"
+        href="{{ url_for('index') }}#prediction">
+        New Prediction
+      </a>
+
+      <a
+        class="btn secondary"
+        href="{{ url_for('history') }}">
+        View Prediction History
+      </a>
+
+      <a
+        class="btn secondary"
+        href="{{ url_for('index') }}">
+        Back to Dashboard
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,1123 @@
+```
+{% extends "base.html" %}
+
+{% block title %}
+Student Performance Analysis & Prediction System
+{% endblock %}
+
+{% block content %}
+
+
+<!-- ========================================================= -->
+<!-- 1. HOME / HERO -->
+<!-- ========================================================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-copy">
+
+    <span class="section-number">1</span>
+
+    <div>
+
+      <h1>
+        Student Performance
+        <br>
+        <span>Analysis & Prediction System</span>
+      </h1>
+
+      <p>
+        Analyze academic performance and predict students'
+        final scores using Machine Learning. Get insights,
+        track progress, and identify students who may need help.
+      </p>
+
+      <div class="hero-actions">
+
+        <a class="btn primary" href="#dashboard">
+          Explore Dashboard
+        </a>
+
+        <a class="btn secondary" href="#prediction">
+          Predict Score
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <img
+    class="hero-image"
+    src="{{ url_for('static', filename='images/student_performance_banner.png') }}"
+    alt="Student performance analytics"
+  >
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 2. DASHBOARD -->
+<!-- ========================================================= -->
+
+<section id="dashboard" class="section">
+
+  <div class="section-head">
+
+    <span class="section-number">2</span>
+
+    <div>
+
+      <h2>Dashboard Overview</h2>
+
+      <p>
+        Important student performance metrics.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="metric-grid">
+
+    <div class="metric blue">
+
+      <span>👥</span>
+
+      <div>
+
+        <strong>{{ total }}</strong>
+
+        <small>
+          Total Students
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="metric green">
+
+      <span>📈</span>
+
+      <div>
+
+        <strong>{{ avg }}</strong>
+
+        <small>
+          Average Final Score
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="metric orange">
+
+      <span>📅</span>
+
+      <div>
+
+        <strong>{{ attendance }}%</strong>
+
+        <small>
+          Average Attendance
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="metric red">
+
+      <span>⚠️</span>
+
+      <div>
+
+        <strong>{{ at_risk }}</strong>
+
+        <small>
+          At Risk Students
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 3. PERFORMANCE ANALYTICS -->
+<!-- ========================================================= -->
+
+<section id="analytics" class="section">
+
+  <div class="section-head">
+
+    <span class="section-number">3</span>
+
+    <div>
+
+      <h2>Performance Analytics</h2>
+
+      <p>
+        Visual analysis using Matplotlib and Seaborn.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="chart-grid">
+
+    <figure class="chart-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/department_average.png') }}"
+        alt="Department-wise average score"
+      >
+
+      <figcaption>
+        Department-wise Average Score — Bar Chart
+      </figcaption>
+
+    </figure>
+
+
+    <figure class="chart-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/study_vs_score.png') }}"
+        alt="Study hours versus final score"
+      >
+
+      <figcaption>
+        Study Hours vs Final Score — Scatter Plot
+      </figcaption>
+
+    </figure>
+
+
+    <figure class="chart-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/attendance_vs_score.png') }}"
+        alt="Attendance versus final score"
+      >
+
+      <figcaption>
+        Attendance vs Final Score — Scatter Plot
+      </figcaption>
+
+    </figure>
+
+
+    <figure class="chart-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/semester_trend.png') }}"
+        alt="Semester-wise performance trend"
+      >
+
+      <figcaption>
+        Semester-wise Trend — Line Chart
+      </figcaption>
+
+    </figure>
+
+
+    <figure class="chart-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/score_distribution.png') }}"
+        alt="Final score distribution"
+      >
+
+      <figcaption>
+        Final Score Distribution — Histogram
+      </figcaption>
+
+    </figure>
+
+
+    <figure class="chart-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/performance_category.png') }}"
+        alt="Performance category"
+      >
+
+      <figcaption>
+        Performance Category — Pie Chart
+      </figcaption>
+
+    </figure>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 4. AI SCORE PREDICTION -->
+<!-- ========================================================= -->
+
+<section id="prediction" class="section prediction-section">
+
+  <div class="section-head">
+
+    <span class="section-number">4</span>
+
+    <div>
+
+      <h2>AI Final Score Prediction</h2>
+
+      <p>
+        Enter student information and predict the final score
+        using the trained Random Forest Regression model.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <form
+    class="prediction-form"
+    method="POST"
+    action="{{ url_for('predict') }}"
+  >
+
+    <div class="form-grid">
+
+
+      <label>
+        Student ID
+
+        <input
+          name="student_id"
+          placeholder="STU1001"
+        >
+
+      </label>
+
+
+      <label>
+        Age
+
+        <input
+          name="age"
+          type="number"
+          min="16"
+          max="40"
+          value="21"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Gender
+
+        <select name="gender">
+
+          <option>Male</option>
+          <option>Female</option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+        Department
+
+        <select name="department">
+
+          {% for d in ['CSE','IT','ECE','ME','CE'] %}
+
+            <option>{{ d }}</option>
+
+          {% endfor %}
+
+        </select>
+
+      </label>
+
+
+      <label>
+        Semester
+
+        <input
+          name="semester"
+          type="number"
+          min="1"
+          max="8"
+          value="6"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Attendance (%)
+
+        <input
+          name="attendance_percentage"
+          type="number"
+          step="0.1"
+          min="0"
+          max="100"
+          value="82"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Study Hours / Day
+
+        <input
+          name="study_hours_per_day"
+          type="number"
+          step="0.1"
+          min="0"
+          max="16"
+          value="5"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Previous Exam Score
+
+        <input
+          name="previous_exam_score"
+          type="number"
+          step="0.1"
+          min="0"
+          max="100"
+          value="74"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Midterm Score
+
+        <input
+          name="midterm_score"
+          type="number"
+          step="0.1"
+          min="0"
+          max="100"
+          value="72"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Assignment (%)
+
+        <input
+          name="assignment_percentage"
+          type="number"
+          step="0.1"
+          min="0"
+          max="100"
+          value="80"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Practical / Lab Score
+
+        <input
+          name="practical_lab_score"
+          type="number"
+          step="0.1"
+          min="0"
+          max="100"
+          value="84"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Sleep Hours / Day
+
+        <input
+          name="sleep_hours_per_day"
+          type="number"
+          step="0.1"
+          min="0"
+          max="16"
+          value="7"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Online Learning Hours
+
+        <input
+          name="online_learning_hours"
+          type="number"
+          step="0.1"
+          min="0"
+          max="20"
+          value="5"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Previous Backlogs
+
+        <input
+          name="previous_backlogs"
+          type="number"
+          min="0"
+          max="10"
+          value="0"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Internet Access
+
+        <select name="internet_access">
+
+          <option>Yes</option>
+          <option>No</option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+        Quiz Score
+
+        <input
+          name="quiz_score"
+          type="number"
+          step="0.1"
+          min="0"
+          max="100"
+          value="76"
+          required
+        >
+
+      </label>
+
+
+    </div>
+
+
+    <button
+      class="btn primary large"
+      type="submit"
+    >
+      🤖 Predict Final Score
+    </button>
+
+  </form>
+
+
+  <div class="note">
+
+    The model uses 15 prediction features.
+    Student ID/name and class participation are stored
+    in the system for identification and analysis but
+    are not model inputs.
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 5. STUDENT ANALYSIS -->
+<!-- ========================================================= -->
+
+<section id="student-analysis" class="section">
+
+  <div class="section-head">
+
+    <span class="section-number">5</span>
+
+    <div>
+
+      <h2>Student Analysis</h2>
+
+      <p>
+        Search a student by ID to view complete academic information.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <form
+    class="searchbar"
+    method="GET"
+    action="{{ url_for('student', student_id='PLACEHOLDER') }}"
+    onsubmit="this.action='/student/'+encodeURIComponent(this.student_id.value);"
+  >
+
+    <input
+      name="student_id"
+      placeholder="Enter Student ID e.g. STU1001"
+      required
+    >
+
+    <button
+      class="btn primary"
+      type="submit"
+    >
+      Search Student
+    </button>
+
+  </form>
+
+
+  <div class="table-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Semester</th>
+          <th>Attendance</th>
+          <th>Previous Score</th>
+          <th>Final Score</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        {% for s in students %}
+
+        <tr>
+
+          <td>{{ s.student_id }}</td>
+
+          <td>{{ s.student_name }}</td>
+
+          <td>{{ s.department }}</td>
+
+          <td>{{ s.semester }}</td>
+
+          <td>{{ s.attendance_percentage }}%</td>
+
+          <td>{{ s.previous_exam_score }}</td>
+
+          <td>
+            <b>{{ s.final_score }}</b>
+          </td>
+
+          <td>
+
+            <a
+              class="link-btn"
+              href="{{ url_for('student', student_id=s.student_id) }}"
+            >
+              View
+            </a>
+
+          </td>
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 6. PERFORMANCE INSIGHTS -->
+<!-- ========================================================= -->
+
+<section id="insights" class="section">
+
+  <div class="section-head">
+
+    <span class="section-number">6</span>
+
+    <div>
+
+      <h2>Performance Insights</h2>
+
+      <p>
+        Understand factors affecting student performance.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="insight-grid">
+
+
+    <div class="insight-card">
+
+      <img
+        src="{{ url_for('static', filename='charts/correlation_heatmap.png') }}"
+        alt="Correlation heatmap"
+      >
+
+    </div>
+
+
+    <div class="insight-card">
+
+      <h3>
+        💡 Key Insights
+      </h3>
+
+      <ul>
+
+        <li>
+          Attendance and previous exam score are useful
+          indicators of final performance.
+        </li>
+
+        <li>
+          Study hours, assignments, quizzes and midterm
+          results provide additional academic signals.
+        </li>
+
+        <li>
+          Previous backlogs can negatively affect the
+          expected final score.
+        </li>
+
+        <li>
+          The dashboard is designed to help teachers
+          identify students who may need additional support.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 7. STUDENT MANAGEMENT -->
+<!-- ========================================================= -->
+
+<section id="student-management" class="section">
+
+  <div class="section-head">
+
+    <span class="section-number">7</span>
+
+    <div>
+
+      <h2>Student Management (SQLite)</h2>
+
+      <p>
+        Add, view, edit, delete and import student records
+        using SQLite and SQL queries.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="management-actions">
+
+    <a
+      class="btn primary"
+      href="{{ url_for('add_student') }}"
+    >
+      ＋ Add Student
+    </a>
+
+
+    <a
+      class="btn secondary"
+      href="{{ url_for('import_csv') }}"
+    >
+      ⇧ Import CSV
+    </a>
+
+
+    <a
+      class="btn secondary"
+      href="{{ url_for('students') }}"
+    >
+      Open Full Management
+    </a>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Semester</th>
+          <th>Attendance</th>
+          <th>Final Score</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        {% for s in students[:6] %}
+
+        <tr>
+
+          <td>{{ s.student_id }}</td>
+
+          <td>{{ s.student_name }}</td>
+
+          <td>{{ s.department }}</td>
+
+          <td>{{ s.semester }}</td>
+
+          <td>{{ s.attendance_percentage }}%</td>
+
+          <td>{{ s.final_score }}</td>
+
+
+          <td class="actions">
+
+            <a
+              class="link-btn"
+              href="{{ url_for('student', student_id=s.student_id) }}"
+            >
+              View
+            </a>
+
+
+            <a
+              class="link-btn edit"
+              href="{{ url_for('edit_student', student_id=s.student_id) }}"
+            >
+              Edit
+            </a>
+
+
+            <form
+              method="POST"
+              action="{{ url_for('delete_student', student_id=s.student_id) }}"
+              onsubmit="return confirm('Delete this student from SQLite?');"
+            >
+
+              <button
+                class="danger-link"
+                type="submit"
+              >
+                Delete
+              </button>
+
+            </form>
+
+          </td>
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 8. PREDICTION HISTORY -->
+<!-- ========================================================= -->
+
+<section id="prediction-history" class="section">
+
+  <div class="section-head">
+
+    <span class="section-number">8</span>
+
+    <div>
+
+      <h2>Prediction History</h2>
+
+      <p>
+        Every prediction is stored in SQLite with student ID,
+        score, category, and date/time.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+          <th>Student ID</th>
+          <th>Predicted Score</th>
+          <th>Category</th>
+          <th>Date & Time</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        {% for h in recent %}
+
+        <tr>
+
+          <td>{{ h.id }}</td>
+
+          <td>{{ h.student_id }}</td>
+
+          <td>
+            <b>{{ h.predicted_score }}</b>
+          </td>
+
+          <td>
+            <span class="badge">
+              {{ h.performance_category }}
+            </span>
+          </td>
+
+          <td>
+            {{ h.created_at }}
+          </td>
+
+          <td class="action-buttons">
+
+            <a
+              href="{{ url_for('view_prediction', prediction_id=h.id) }}"
+              class="btn-view"
+            >
+              View
+            </a>
+
+
+            <form
+              method="POST"
+              action="{{ url_for('delete_prediction', prediction_id=h.id) }}"
+              style="display:inline;"
+              onsubmit="return confirm('Are you sure you want to delete this prediction?');"
+            >
+
+              <button
+                type="submit"
+                class="btn-delete"
+              >
+                Delete
+              </button>
+
+            </form>
+
+          </td>
+
+        </tr>
+
+
+        {% else %}
+
+        <tr>
+
+          <td colspan="6">
+            No predictions yet.
+            Use the prediction form above.
+          </td>
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <a
+    class="btn secondary"
+    href="{{ url_for('history') }}"
+  >
+    View Full History
+  </a>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- 9. TECHNOLOGY & PROJECT WORKFLOW -->
+<!-- ========================================================= -->
+
+<section id="technology-workflow" class="section tech">
+
+  <div class="section-head">
+
+    <span class="section-number">9</span>
+
+    <div>
+
+      <h2>
+        Technology & Project Workflow
+      </h2>
+
+      <p>
+        Complete stack used in the project.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="tech-grid">
+
+    {% for t in [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "Seaborn",
+      "SQLite",
+      "SQL Queries",
+      "Scikit-learn",
+      "Random Forest Regression",
+      "Flask",
+      "HTML/CSS/JavaScript"
+    ] %}
+
+      <div class="tech-chip">
+        {{ t }}
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+
+  <div class="workflow">
+
+    <span>Student Data</span>
+
+    <b>→</b>
+
+    <span>Data Cleaning</span>
+
+    <b>→</b>
+
+    <span>Data Analysis</span>
+
+    <b>→</b>
+
+    <span>Visualization</span>
+
+    <b>→</b>
+
+    <span>SQLite + SQL</span>
+
+    <b>→</b>
+
+    <span>ML Training</span>
+
+    <b>→</b>
+
+    <span>Prediction</span>
+
+    <b>→</b>
+
+    <span>Flask Web App</span>
+
+  </div>
+
+</section>
+
+
+{% endblock %}
+```

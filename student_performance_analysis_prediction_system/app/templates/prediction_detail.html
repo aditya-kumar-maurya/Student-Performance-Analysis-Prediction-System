@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Details{% endblock %}
+
+{% block content %}
+
+<section class="page-wrap">
+
+    <div class="page-title">
+        <span class="section-number">8</span>
+
+        <div>
+            <h1>Prediction Details</h1>
+            <p>Complete prediction record.</p>
+        </div>
+    </div>
+
+    <div class="result-card wide">
+
+        <h2>Prediction Information</h2>
+
+        <div class="detail-grid">
+
+            <div class="detail">
+                <small>Prediction ID</small>
+                <strong>{{ prediction.id }}</strong>
+            </div>
+
+            <div class="detail">
+                <small>Student ID</small>
+                <strong>{{ prediction.student_id }}</strong>
+            </div>
+
+            <div class="detail">
+                <small>Predicted Score</small>
+                <strong>{{ prediction.predicted_score }}</strong>
+            </div>
+
+            <div class="detail">
+                <small>Performance Category</small>
+                <strong>{{ prediction.performance_category }}</strong>
+            </div>
+
+            <div class="detail">
+                <small>Date & Time</small>
+                <strong>{{ prediction.created_at }}</strong>
+            </div>
+
+        </div>
+
+        <div class="hero-actions">
+
+            <a
+                class="btn secondary"
+                href="{{ url_for('history') }}">
+                ← Back to Prediction History
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

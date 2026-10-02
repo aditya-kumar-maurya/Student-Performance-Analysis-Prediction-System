@@ -1,0 +1,7 @@
+Flask>=3.0,<4
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
+seaborn>=0.13
+scikit-learn>=1.4
+joblib>=1.3

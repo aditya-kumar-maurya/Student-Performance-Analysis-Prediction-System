@@ -1,0 +1,6 @@
+@echo off
+echo Installing requirements...
+python -m pip install -r requirements.txt
+echo Starting Student Performance Analysis & Prediction System...
+python run.py
+pause
