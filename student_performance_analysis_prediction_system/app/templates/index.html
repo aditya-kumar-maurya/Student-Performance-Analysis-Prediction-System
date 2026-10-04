@@ -773,11 +773,11 @@ Student Performance Analysis & Prediction System
 
     <div>
 
-      <h2>Student Management (SQLite)</h2>
+      <h2>Student Management (PostgreSQL)</h2>
 
       <p>
         Add, view, edit, delete and import student records
-        using SQLite and SQL queries.
+        using PostgreSQL and SQL queries.
       </p>
 
     </div>
@@ -874,7 +874,7 @@ Student Performance Analysis & Prediction System
             <form
               method="POST"
               action="{{ url_for('delete_student', student_id=s.student_id) }}"
-              onsubmit="return confirm('Delete this student from SQLite?');"
+              onsubmit="return confirm('Delete this student from PostgreSQL?');"
             >
 
               <button
@@ -917,7 +917,7 @@ Student Performance Analysis & Prediction System
       <h2>Prediction History</h2>
 
       <p>
-        Every prediction is stored in SQLite with student ID,
+        Every prediction is stored in PostgreSQL with student ID,
         score, category, and date/time.
       </p>
 
@@ -1065,7 +1065,7 @@ Student Performance Analysis & Prediction System
       "Pandas",
       "Matplotlib",
       "Seaborn",
-      "SQLite",
+      "PostgreSQL",
       "SQL Queries",
       "Scikit-learn",
       "Random Forest Regression",
@@ -1100,7 +1100,7 @@ Student Performance Analysis & Prediction System
 
     <b>→</b>
 
-    <span>SQLite + SQL</span>
+    <span>PostgreSQL + SQL</span>
 
     <b>→</b>
 

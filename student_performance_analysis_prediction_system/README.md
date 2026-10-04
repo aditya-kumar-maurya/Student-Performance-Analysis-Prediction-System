@@ -1,235 +1,339 @@
 # Student Performance Analysis & Prediction System
 
-A complete fresher-friendly Python + Flask + SQLite + Machine Learning project for analyzing academic performance and predicting a student's final score.
+A **Python + Flask + PostgreSQL + Machine Learning** web application for analyzing student academic performance and predicting a student's final score.
 
-## 1. Main Purpose
+The project combines **Data Analysis, Data Visualization, Machine Learning, SQL, PostgreSQL, Supabase and Flask** into one practical academic project.
 
-The main purpose of this project is to:
-- analyze student academic performance;
-- understand patterns using data analysis and visualization;
-- predict a student's final score from academic information;
-- help teachers identify students who may need additional support.
+---
 
-This project was made to understand how data cleaning, data analysis and machine learning can be applied to a real-life student dataset.
+## 1. Project Overview
 
-## 2. Technology Stack
+The system is designed to analyze student academic data and predict the final score using Machine Learning.
 
-- Python
-- NumPy
-- Pandas
-- Matplotlib
-- Seaborn
-- SQLite
-- SQL queries
-- Scikit-learn
-- Random Forest Regression
-- Flask
-- HTML/CSS/JavaScript
+### Main Features
 
-## 3. Role of Each Technology
+* Student performance analysis
+* Data visualization
+* Final score prediction
+* Student CRUD operations
+* CSV data import
+* Performance dashboard
+* Prediction history
+* PostgreSQL database
 
-| Technology | Use |
-|---|---|
-| Python | Overall project development |
-| NumPy | Numerical calculations and numerical data |
-| Pandas | Data cleaning, processing and analysis |
-| Matplotlib | Data visualization |
-| Seaborn | Statistical visualization and correlation heatmap |
-| SQLite | Store student information and prediction history |
-| SQL | SELECT, INSERT and aggregation queries |
-| Scikit-learn | Train and evaluate the ML model |
-| Random Forest Regression | Predict final score |
-| Flask | Web application and model/frontend integration |
+---
 
-## 4. Dataset
+## 2. Main Objectives
+
+* Clean and preprocess student data
+* Perform Exploratory Data Analysis
+* Create meaningful visualizations
+* Train a Machine Learning model
+* Predict student final scores
+* Store student and prediction data in PostgreSQL
+* Provide a web-based interface using Flask
+
+---
+
+## 3. Technology Stack
+
+* Python
+* NumPy
+* Pandas
+* Matplotlib
+* Seaborn
+* Scikit-learn
+* Random Forest Regression
+* Flask
+* PostgreSQL
+* Supabase
+* SQL
+* HTML
+* CSS
+* JavaScript
+* Git & GitHub
+
+---
+
+## 4. Role of Technologies
+
+| Technology    | Purpose                         |
+| ------------- | ------------------------------- |
+| Python        | Backend and project development |
+| NumPy         | Numerical processing            |
+| Pandas        | Data cleaning and analysis      |
+| Matplotlib    | Data visualization              |
+| Seaborn       | Statistical visualization       |
+| Scikit-learn  | Machine Learning                |
+| Random Forest | Final score prediction          |
+| Flask         | Web application backend         |
+| PostgreSQL    | Data storage                    |
+| Supabase      | Cloud PostgreSQL                |
+| SQL           | Database operations             |
+| HTML/CSS/JS   | Frontend                        |
+| Git/GitHub    | Version control                 |
+
+---
+
+## 5. Dataset
 
 The project contains **500 synthetic student records**.
 
-### 15 prediction features
+### Machine Learning Features
+
+The model uses 15 input features:
+
 1. Age
 2. Gender
 3. Department
 4. Semester
-5. Attendance %
-6. Study hours per day
-7. Previous exam score
-8. Midterm score
-9. Assignment %
-10. Practical/Lab score
-11. Sleep hours per day
-12. Online learning hours
-13. Previous backlogs
-14. Internet access
-15. Quiz score
+5. Attendance Percentage
+6. Study Hours Per Day
+7. Previous Exam Score
+8. Midterm Score
+9. Assignment Percentage
+10. Practical/Lab Score
+11. Sleep Hours Per Day
+12. Online Learning Hours
+13. Previous Backlogs
+14. Internet Access
+15. Quiz Score
 
-### Additional stored fields
-- Student ID
-- Student Name
-- Class Participation Score
-- Final Score (target variable)
+### Additional Fields
 
-`class_participation_score` is cleaned and included in analysis, while the model intentionally uses exactly the 15 prediction features listed above.
+* Student ID
+* Student Name
+* Class Participation Score
+* Final Score
 
-## 5. Data Cleaning
+`Final Score` is the target variable.
 
-Pandas is used to:
-- detect missing values;
-- convert numeric columns to numeric types;
-- fill numeric missing values using the median;
-- fill categorical missing values using the mode;
-- prepare the dataset for analysis and machine learning.
+---
 
-The raw CSV intentionally contains a few missing values so the cleaning step can be demonstrated.
+## 6. Data Cleaning & Preprocessing
 
-## 6. Data Analysis and Visualization
+Pandas is used for:
 
-The project generates:
-- Department-wise average score — Bar Chart
-- Study Hours vs Final Score — Scatter Plot
-- Attendance vs Final Score — Scatter Plot
-- Semester-wise average score — Line Chart
-- Final Score Distribution — Histogram
-- Performance Category — Pie Chart
-- Academic Correlation Heatmap
+* Handling missing values
+* Converting data types
+* Handling numerical and categorical data
+* Preparing features for Machine Learning
 
-## 7. Machine Learning
+---
 
-Target variable:
-`final_score`
+## 7. Exploratory Data Analysis
 
-Model:
-**Random Forest Regression from Scikit-learn**
+EDA is performed to understand relationships between student performance factors.
 
-The model is trained using a train/test split. The pipeline handles:
-- numeric values;
-- missing values;
-- categorical encoding;
-- Random Forest Regression.
+Examples:
 
-Evaluation metrics printed by `scripts/train_model.py`:
-- MAE
-- RMSE
-- R²
+* Attendance vs Final Score
+* Study Hours vs Final Score
+* Department-wise Performance
+* Semester-wise Performance
+* Score Distribution
+* Feature Correlation
 
-These metrics are for the included synthetic dataset and should not be presented as real-world model performance.
+---
 
-## 8. Flask Web Application
+## 8. Data Visualization
 
-The dashboard follows this flow:
+The project includes:
 
-First Screen
-↓
-Hero + Project Image
-↓
-Dashboard Overview
-↓
-Performance Analytics
-↓
-AI Score Prediction
-↓
-Student Analysis
-↓
-Data Insights
-↓
-Student Records
-↓
-Prediction History
-↓
-Technology + Footer
+* Bar Chart
+* Scatter Plot
+* Line Chart
+* Histogram
+* Pie Chart
+* Correlation Heatmap
 
-### Main features
-- Dashboard metrics
-- Academic charts
-- Final score prediction form
-- Student search by ID
-- Complete student profile
-- Student records: view and search (SQLite CRUD-enabled)
-- CSV import
-- Prediction history
-- SQLite database
-- Random Forest model connected to Flask
+These charts help understand student performance patterns.
 
-## 9. How to Run
+---
 
-### Step 1: Open terminal
-Go to the project folder.
+# 9. Machine Learning
 
-### Step 2: Create a virtual environment
+### Target Variable
+
+```text
+final_score
+```
+
+### Algorithm
+
+The project uses:
+
+```text
+Random Forest Regression
+```
+
+The Machine Learning workflow is:
+
+```text
+Dataset
+   ↓
+Data Cleaning
+   ↓
+Feature Selection
+   ↓
+Preprocessing
+   ↓
+Train-Test Split
+   ↓
+Random Forest Regression
+   ↓
+Model Evaluation
+   ↓
+Final Score Prediction
+```
+
+### Evaluation Metrics
+
+The model is evaluated using:
+
+* MAE
+* MSE
+* RMSE
+* R² Score
+
+---
+
+# 10. Flask Web Application
+
+Flask is used to integrate the Machine Learning model with the web application.
+
+The application provides:
+
+* Dashboard
+* Performance Analytics
+* Student Analysis
+* Student Management
+* CSV Import
+* Score Prediction
+* Prediction History
+
+---
+
+# 11. Database
+
+The project uses **PostgreSQL** for storing:
+
+* Student records
+* Academic information
+* Final scores
+* Prediction history
+
+**Supabase** is used for cloud-hosted PostgreSQL.
+
+---
+
+# 12. Project Workflow
+
+```text
+Student Data
+     ↓
+Data Cleaning
+     ↓
+EDA & Visualization
+     ↓
+Machine Learning
+     ↓
+Random Forest Model
+     ↓
+Flask Application
+     ↓
+PostgreSQL / Supabase
+     ↓
+Prediction & Dashboard
+```
+
+---
+
+# 13. Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/student-performance-analysis.git
+cd student-performance-analysis
+```
+
+Create virtual environment:
+
 ```bash
 python -m venv venv
 ```
 
-Windows:
+Activate:
+
 ```bash
 venv\Scripts\activate
 ```
 
-### Step 3: Install packages
+Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4: Run the project
-The ZIP already contains the dataset, SQLite database, charts and trained model, so you can directly run:
+Configure your PostgreSQL/Supabase database and environment variables.
+
+Run the application:
 
 ```bash
-python run.py
+python app.py
 ```
 
 Open:
-`http://127.0.0.1:5000`
 
-### Rebuild everything from scratch
-If you want to recreate the data/model:
-```bash
-python scripts/generate_data.py
-python scripts/train_model.py
-python scripts/init_db.py
-python scripts/generate_charts.py
-python run.py
+```text
+http://127.0.0.1:5000
 ```
 
-## 10. Project Explanation for Interview
+---
 
-> "My project is Student Performance Analysis and Prediction System. The main purpose of this project is to analyze students' academic performance and predict their final score based on different academic factors.
->
-> I used Python for the overall development. I used NumPy for numerical calculations and Pandas for data cleaning, processing and analysis.
->
-> For visualization, I used Matplotlib and Seaborn to create charts such as department-wise average score, study hours versus final score, attendance versus final score and performance category.
->
-> I used SQLite to store student information and SQL SELECT queries to read student records and dashboard metrics. I also use an INSERT query to store prediction history.
->
-> For prediction, I used a Random Forest Regression model from Scikit-learn. The input is student academic information and the output is the predicted final score.
->
-> Finally, I used Flask to create a web application where users can view the dashboard, search student records and predict a student's final score."
+# 14. Project Structure
 
-## 11. Simple Project Workflow
+```text
+student-performance-analysis/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── data/
+├── model/
+├── scripts/
+├── static/
+└── templates/
+```
 
-Student Data
-→ Data Cleaning
-→ Data Processing
-→ Data Analysis
-→ Visualization
-→ SQLite + SQL
-→ Machine Learning
-→ Random Forest Regression
-→ Final Score Prediction
-→ Flask Web Application
+---
 
-## 12. Important Note
+# 15. Future Enhancements
 
-The dataset is synthetic and created for educational/demo purposes. It is not real student data.
+* Model comparison
+* Hyperparameter tuning
+* Student risk prediction
+* Automated recommendations
+* PDF/Excel reports
+* Authentication
+* Cloud deployment
+* Advanced dashboards
 
+---
 
-## SQLite Student Management
-The project does not use MySQL and does not have a login page. Student records are managed directly in SQLite with SQL CRUD operations:
-- Create: Add Student (`INSERT`)
-- Read: View/Search Student (`SELECT`)
-- Update: Edit Student (`UPDATE`)
-- Delete: Delete Student (`DELETE`)
-- CSV Import: Pandas reads the CSV and inserts/replaces rows in SQLite.
+# 16. Learning Outcomes
 
-The dashboard, prediction history, and student analysis all use the same `data/student_performance.db` database.
-## UI Theme
+Through this project, I gained practical experience in:
 
-The dashboard uses a dark-mode interface with colorful Matplotlib/Seaborn charts for better contrast and readability.
+**Python, Pandas, NumPy, Data Analysis, Data Visualization, Machine Learning, Scikit-learn, SQL, PostgreSQL, Flask and Git/GitHub.**
+
+---
+
+## Author
+
+**Aditya Kumar Maurya**
+
+Computer Science Engineering Student
+
+**Project:** Student Performance Analysis & Prediction System

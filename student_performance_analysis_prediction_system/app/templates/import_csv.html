@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Import CSV - SQLite{% endblock %}
+{% block title %}Import CSV - PostgreSQL{% endblock %}
 {% block content %}
 <section class="page-wrap">
   <div class="page-title"><span class="section-number">7</span><div><h1>Import Student CSV</h1><p>Upload a CSV file and import its 500-style student records into SQLite using Pandas.</p></div></div>
@@ -8,7 +8,7 @@
     <p class="muted">The CSV should contain the project student columns. Existing Student IDs are replaced using SQLite <strong>INSERT OR REPLACE</strong>.</p>
     <form method="POST" enctype="multipart/form-data" class="upload-form">
       <input type="file" name="csv_file" accept=".csv" required>
-      <button class="btn primary" type="submit">⇧ Import into SQLite</button>
+      <button class="btn primary" type="submit">⇧ Import into PostgreSQL</button>
     </form>
     <p class="note">Use the included <code>data/student_performance_500.csv</code> as a ready example.</p>
   </div>

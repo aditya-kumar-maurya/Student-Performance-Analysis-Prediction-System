@@ -1,0 +1,23 @@
+# Environment variables
+.env
+../.env
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# PyCharm
+.idea/
+../.idea/
+
+# Old local database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
